@@ -40,6 +40,7 @@ Many entries correspond to built in IDL routines (abs, alog, etc). You can filte
 by specifying the /no_builtin flag::
 
    IDL> print, finddep_all('test.pro', /no_builtin)
+
    { arrgen /Users/beaumont/idl/pro/local/documented/arrgen.pro}{ test test.pro}{
    this_function_doesnt_exist }
 
@@ -49,11 +50,13 @@ doesn't have any source file associated with it. This is likely a
 missing dependency. You can look at only the missing dependencies::
 
 	IDL> print, finddep_all('test.pro', /no_source, /no_builtin)
+	
 	{ this_function_doesnt_exist }
 
 Or instead filter them out::
 
    IDL> print, finddep_all('test.pro', /only_source)
+
    { arrgen /Users/beaumont/idl/pro/local/documented/arrgen.pro}{ test test.pro}
 
 
