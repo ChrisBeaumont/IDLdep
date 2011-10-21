@@ -23,6 +23,14 @@ Use
 =====
 Lets consider the test file test.pro:
 
+     pro test
+       print, 'This is a test'
+       x = arrgen(1., 10., nstep = 10)
+       y = this_function_doesnt_exist(5)
+     end
+
+We can find all the dependencies needed to run this file with finddep_all:
+
      IDL> print, finddep_all('test.pro')
 
      { abs }{ alog }{ arrgen /Users/beaumont/idl/pro/local/documented/arrgen.pro}{
