@@ -51,17 +51,6 @@ function finddep_all, start, count, only_source = only_source, no_source = no_so
   if keyword_set(only_source) && keyword_set(no_source) then $
      message, 'Cannot set /only_source and /no_source'
 
-  ;catch, error
-  ;if error ne 0 then begin
-  ;   catch, /cancel
-  ;   if obj_valid(x) then obj_destroy, x
-  ;   if obj_valid(h) then obj_destroy, h
-  ;   if obj_valid(r) then obj_destroy, r
-  ;   print, !error_state.msg_prefix + !error_state.msg
-  ;  print, 'aborting'
-  ;   return, 0
-  ;endif
-
   todo = obj_new('stack')            ;- holds list of dependencies to resolve
   result_hash = obj_new('hashtable') ;- hold structure list of dependencies
   done = obj_new('hashtable')           ;- holds list of already-processed deps
