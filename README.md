@@ -21,7 +21,7 @@ http://www.physics.wisc.edu/~craigm/idl/idl.html
 
 Use
 =====
-Lets consider the test file test.pro::
+Lets consider the test file test.pro:
 
      IDL> print, finddep_all('test.pro')
 
@@ -37,27 +37,24 @@ name = source) lists the file name that contains the source code for
 that function, if one was found.
 
 Many entries correspond to built in IDL routines (abs, alog, etc). You can filter these out
-by specifying the /no_builtin flag::
+by specifying the /no_builtin flag:
 
-   IDL> print, finddep_all('test.pro', /no_builtin)
-
-   { arrgen /Users/beaumont/idl/pro/local/documented/arrgen.pro}{ test test.pro}{
-   this_function_doesnt_exist }
+     IDL> print, finddep_all('test.pro', /no_builtin)
+     { arrgen /Users/beaumont/idl/pro/local/documented/arrgen.pro}{ test test.pro}{
+     this_function_doesnt_exist }
 
 There are just 3 dependencies beyond calls to IDL builtins: arrgen,
 test, and this_function_doesnt_exist. Note that the last function
 doesn't have any source file associated with it. This is likely a
-missing dependency. You can look at only the missing dependencies::
-
-	IDL> print, finddep_all('test.pro', /no_source, /no_builtin)
+missing dependency. You can look at only the missing dependencies:
 	
-	{ this_function_doesnt_exist }
+     IDL> print, finddep_all('test.pro', /no_source, /no_builtin)
+     { this_function_doesnt_exist }
 
-Or instead filter them out::
+Or instead filter them out:
 
-   IDL> print, finddep_all('test.pro', /only_source)
-
-   { arrgen /Users/beaumont/idl/pro/local/documented/arrgen.pro}{ test test.pro}
+     IDL> print, finddep_all('test.pro', /only_source)
+     { arrgen /Users/beaumont/idl/pro/local/documented/arrgen.pro}{ test test.pro}
 
 
 The other useful function in this library is bundle_dep. This routine
