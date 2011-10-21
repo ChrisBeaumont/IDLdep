@@ -162,6 +162,12 @@ function finddep_all, start, count, only_source = only_source, no_source = no_so
      else result = rec
   endif
 
+  ;- some blank entries have been creeping in.
+  ;- remove them.
+  good = where(result.func ne '', count)
+  if count ne 0 then result = result[good] $
+  else result = rec
+
   return, result
 end
      

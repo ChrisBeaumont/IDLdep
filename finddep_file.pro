@@ -60,8 +60,11 @@ function finddep_file, file, count, definition = definition, defct = defct, verb
 
   if sct eq 0 then return, ''
   if defct eq 0 then definition = ''
-  
-  count = sct
+
+  hit = where(result ne '', count)
+  if count ne 0 then result = result[hit] $
+  else result = -1
+
   return, result
 
 end
