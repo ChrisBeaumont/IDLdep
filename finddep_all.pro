@@ -12,7 +12,7 @@
 ;  only_source: If set, only return dependencies for which
 ;  corresponding source code is found. This will filter out
 ;  dependencies to IDL built in functions (like print), but will also
-;  ignore potentially problematic missing dependencies. 
+;  ignore potentially problematic missing dependencies.
 ;
 ;  no_source: If set, only return dependencies for which corresponding
 ;  source code is not found. This will return calls to built-in
@@ -47,7 +47,7 @@ function finddep_all, start, count, only_source = only_source, no_source = no_so
      print, 'result = finddep_all(start, [count, /only_source, /no_source])'
      return, !values.f_nan
   endif
-  
+
   if keyword_set(only_source) && keyword_set(no_source) then $
      message, 'Cannot set /only_source and /no_source'
 
@@ -64,7 +64,7 @@ function finddep_all, start, count, only_source = only_source, no_source = no_so
   ;- for each dependency, create an empty entry in result_hash
   for i = 0, count - 1, 1 do $
      result_hash->add, dep[i], {func:dep[i], source:''}, /replace
-  
+
   ;- for each definition, create a full entry in result_hash
   for i = 0, dct - 1, 1 do begin
      result_hash->add, d[i], {func:d[i], source:start}, /replace
@@ -82,11 +82,11 @@ function finddep_all, start, count, only_source = only_source, no_source = no_so
      done->add, func, 1
 
      entry = result_hash->get(func)
-     
+
      ;- sanity check -- can't get here if we've already
      ;- resolved the dependency
      assert, entry.source eq '', 'Already processed dependency'
-     
+
      ;- guess at file
      file = (file_which(func+'.pro'))[0]
 
@@ -111,12 +111,12 @@ function finddep_all, start, count, only_source = only_source, no_source = no_so
      endfor
 
   endwhile
-  
+
   obj_destroy, [todo, done]
 
   ;- convert hashtable to structure array
   k = result_hash->keys()
-  count = result_hash->count()
+  count = n_elements(k)
   if count eq 0 then begin
      obj_destroy, result_hash
      return, rec
@@ -146,7 +146,7 @@ function finddep_all, start, count, only_source = only_source, no_source = no_so
      ind = value_locate(builtin, result.func) > 0
      good = builtin[ind] ne result.func
      hit = where(good, count)
-     
+
      if count ne 0 then result = result[hit] $
      else result = rec
   endif
@@ -159,7 +159,7 @@ function finddep_all, start, count, only_source = only_source, no_source = no_so
 
   return, result
 end
-     
+
 pro test
 
   d = finddep_all('finddep_all.pro')
